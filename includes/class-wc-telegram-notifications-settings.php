@@ -18,8 +18,8 @@ class WC_Settings_Telegram_Notifications extends WC_Settings_Page
         $locale = get_locale();
 
         $video_urls = array(
-            'en_US' => 'https://www.youtube.com/watch?v=ENGLISH_VIDEO_ID',
-            'fa_IR' => 'https://www.youtube.com/watch?v=PERSIAN_VIDEO_ID',
+            'en_US' => 'https://www.youtube.com/watch?v=Hq-jbnU_NRc',
+            'fa_IR' => 'https://www.youtube.com/watch?v=8KppO5pUkdI',
             // Add more languages as needed
         );
 
