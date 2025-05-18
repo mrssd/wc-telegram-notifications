@@ -11,7 +11,8 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 A lightweight plugin that sends WooCommerce order or stock updates to Telegram using a bot.
 
 == Description ==
-- Send WooCommerce order status updates to Telegram
+- Send WooCommerce order status updates to Telegram 
+- Without adding any delay in order checkouts
 - Send Products out of stock or Limited quantity notification
 - Support Telegram super group with different topic
 - Support for both direct Telegram Bot API and Google Apps Script integration for countries have limit access to Telegram APIs
@@ -25,6 +26,9 @@ A lightweight plugin that sends WooCommerce order or stock updates to Telegram u
 2. Upload the plugin folder to your WordPress plugins directory (`wp-content/plugins/`)
 3. Activate the plugin through the WordPress admin panel
 4. Go to WooCommerce → Settings → Telegram Notifications to configure the plugin
+
+For using Goolge Script, use the source in Docs/google_script_source.js in Github :
+https://github.com/mrssd/wc-telegram-notifications
 
 == Frequently Asked Questions ==
 - Is this plugin works in countries with Telegram limitation ? Yes, you can use Google Script to use this plugin
