@@ -1,0 +1,265 @@
+# Copyright (C) 2025 Satyar Salehian
+# This file is distributed under the same license as the WooCommerce Notifications via Telegram Bot plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Notifications via Telegram Bot 1.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wc-telegram-"
+"notifications\n"
+"POT-Creation-Date: 2025-05-18T06:06:57+00:00\n"
+"PO-Revision-Date: 2025-05-17 23:07-0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+"X-Domain: wc-telegram-notifications\n"
+
+#. Plugin Name of the plugin
+#: woocommerce-telegram-notifications.php
+msgid "Order and Stock Notifications via Telegram Bot for WooCommerce"
+msgstr "اطلاع رسانی اعلان های ووکامرس با ربات تلگرام"
+
+#. Description of the plugin
+#: woocommerce-telegram-notifications.php
+msgid ""
+"Send WooCommerce order status updates directly to Telegram using Bot API or "
+"Google Apps Script"
+msgstr ""
+"ارسال اعلان سفارشات ووکامرس به ربات تلگرام با وبسرویس رسمی تلگرام و یا "
+"Google Apps Script برای کشوری دارای محدودیت"
+
+#. Author of the plugin
+#: woocommerce-telegram-notifications.php
+msgid "Satyar Salehian"
+msgstr "ساتیار صالحیان"
+
+#: includes/class-wc-telegram-notifications-settings.php:12
+msgid "Telegram Notifications"
+msgstr "اطلاع رسانی ربات تلگرام"
+
+#: includes/class-wc-telegram-notifications-settings.php:33
+msgid "Telegram Notifications Settings"
+msgstr "تنظیمات"
+
+#. translators: %s: Video tutorial link
+#: includes/class-wc-telegram-notifications-settings.php:37
+#, php-format
+msgid ""
+"Configure your Telegram bot settings for WooCommerce order notifications. <a "
+"href=\"%s\" target=\"_blank\">Watch our tutorial video</a> to learn how to "
+"setup this plugin."
+msgstr ""
+"ربات تلگرام خود را برای اعلان های ووکامرس تنظیم کنید.  <a href=\"%s\" "
+"target=\"_blank\">مشاهده ویدیو آموزشی</a> متوانید با این ویدیو نحوه تنظیمات "
+"ربات و همچنین توضیحات مربوط به افزونه را مشاهده کنید."
+
+#: includes/class-wc-telegram-notifications-settings.php:43
+msgid "Telegram Bot Token"
+msgstr "توکن ربات"
+
+#: includes/class-wc-telegram-notifications-settings.php:44
+msgid "Enter your Telegram Bot Token"
+msgstr "توکن ربات تلگرام را وارد کنید"
+
+#: includes/class-wc-telegram-notifications-settings.php:51
+msgid "Chat ID / Group ID"
+msgstr "شناسه چت / شناسه گروه یا سوپر گروه"
+
+#: includes/class-wc-telegram-notifications-settings.php:52
+msgid "Enter your Telegram Chat ID or Group ID"
+msgstr "شناسه چت یا گروه را وارد کنید"
+
+#: includes/class-wc-telegram-notifications-settings.php:53
+msgid "- To find your Chat ID, use @userinfobot "
+msgstr "- برای دریافت شناسه کاربری خود از ربات @userinfobot استفاده کنید "
+
+#: includes/class-wc-telegram-notifications-settings.php:54
+msgid ""
+"- To find your Group ID, add this @getidsbot bot to your group. After "
+"getting group ID remmeber to remove this bot from the group."
+msgstr ""
+"- برای دریافت شناسه گروه ابتدا ربات @getidsbot در گروه عضو کرده و پس از "
+"دریافت شناسه آن را حذف کنید."
+
+#: includes/class-wc-telegram-notifications-settings.php:55
+msgid ""
+"- If you are using a Super Group, prepend the group ID with -100. For "
+"example, if your group ID is 123456789, use -100123456789."
+msgstr ""
+"- اگر از سوپر گروه یا گروه های تایپک دار استفاده می کنید، ایدی گروه باید با "
+"عبارت “-100” شروع شود. به طور مثال ایدی 123456789 باید در تنظیمات به صورت "
+"“-100123456789” تنظیم گردد."
+
+#: includes/class-wc-telegram-notifications-settings.php:56
+msgid ""
+"- If you are using a normal group, prepend the group ID with -100. For "
+"example, if your group ID is 123456789, use -100123456789."
+msgstr ""
+"- اگر از گروه معمولی استفاده می کنید، ایدی گروه باید با عبارت “-100” شروع "
+"شود. به طور مثال ایدی 123456789 باید در تنظیمات به صورت “-100123456789” "
+"تنظیم گردد."
+
+#: includes/class-wc-telegram-notifications-settings.php:64
+msgid "Orders Topic ID "
+msgstr "شناسه تایپک برای سفارشات "
+
+#: includes/class-wc-telegram-notifications-settings.php:65
+msgid ""
+"Enter your Telegram topic ID for Super Groups or leave it empty if you use "
+"normal group or chat."
+msgstr ""
+"ایدی تایپک سفارشات را برای سوپر گروه تنظیم کنید و یا برای ارسال عادی خالی "
+"بگذارید. ویدیو آموزشی را درباره این مورد مشاهده کنید."
+
+#: includes/class-wc-telegram-notifications-settings.php:72
+msgid "Order Status Triggers"
+msgstr "وضعیت های سفارشات"
+
+#: includes/class-wc-telegram-notifications-settings.php:73
+msgid "Select which order statuses should trigger notifications"
+msgstr "وضعیت هایی که قصد دریافت اعلان برای آنها دارید را انتخاب کنید"
+
+#: includes/class-wc-telegram-notifications-settings.php:81
+msgid "Message Template"
+msgstr "متن پیام"
+
+#: includes/class-wc-telegram-notifications-settings.php:82
+msgid ""
+"Customize your notification message. Available tags: {order_id}, {status}, "
+"{customer_name}, {currency}, {total}, {total_formated}, {billing_email}, "
+"{shipping_method}, {payment_method}, {date}, {time}, {products}"
+msgstr ""
+"می توانید از متغییر های زیر استفاده کنید : \n"
+"‬\n"
+"‏‫{order_id}, {status}, {customer_name}, {currency}, {total}, "
+"{total_formated}, {billing_email}, {shipping_method}, {payment_method}, "
+"{date}, {time}, {products}"
+
+#: includes/class-wc-telegram-notifications-settings.php:89
+msgid "Use Google Apps Script"
+msgstr "استفاده از  Google Apps Script"
+
+#: includes/class-wc-telegram-notifications-settings.php:90
+msgid "Enable to use Google Apps Script instead of direct Telegram API"
+msgstr "فعال سازی ارسال از طریق Google Apps Script برای کشور های دارای محدودیت"
+
+#: includes/class-wc-telegram-notifications-settings.php:96
+msgid "Google Script Web App URL"
+msgstr "آدرس لینک Google Apps Script"
+
+#: includes/class-wc-telegram-notifications-settings.php:97
+msgid "Enter your Google Apps Script Web App URL"
+msgstr "لینک عمومی Google Apps Script خود را وارد کنید"
+
+#: includes/class-wc-telegram-notifications-settings.php:106
+msgid "Enable Stock Notifications"
+msgstr "فعال سازی اعلان کمبود کالا"
+
+#: includes/class-wc-telegram-notifications-settings.php:107
+msgid "Send notifications when products become out of stock"
+msgstr "با فعال سازی این گزینه در صورت اتمام یا کمبود کالا اعلان ارسال می شود"
+
+#: includes/class-wc-telegram-notifications-settings.php:113
+msgid "Topic ID for Stock "
+msgstr "تایپک سوپر گروه برای اعلان کمبود یا اتمام کالا "
+
+#: includes/class-wc-telegram-notifications-settings.php:114
+msgid ""
+"Enter your Telegram topic ID for Stock - if this does not set the defult "
+"ones will use or leave it empty"
+msgstr ""
+"ایدی تاپیک سوپر گروه برای اعلان های کمبود موجودی کالا - صورتی که خالی گذاشته "
+"شود از تنظیمات اعلان سفارشات استفاده می شود"
+
+#: includes/class-wc-telegram-notifications-settings.php:125
+msgid "Test Notifications"
+msgstr "ارسال پیام تستی"
+
+#: includes/class-wc-telegram-notifications-settings.php:127
+msgid "Send a test message to verify your settings."
+msgstr ""
+"می توانید برای بررسی صحت تنظیمات پیام تستی ارسال کنید - قبل از ارسال یک بار "
+"تنظیمات را ذخیره کنید."
+
+#: includes/class-wc-telegram-notifications-settings.php:145
+msgid "Send Test Message"
+msgstr "ارسال پیام تستی"
+
+#: includes/class-wc-telegram-notifications-settings.php:154
+msgid "Test message sent successfully!"
+msgstr "پیام تستی با موفقیت ارسال شد!"
+
+#: includes/class-wc-telegram-notifications-settings.php:158
+msgid "Failed to send test message. Please check your settings."
+msgstr "ارسال پیام با خطا مواجه شد - تنظیمات را بررسی کنید."
+
+#. Translators: 1: Product name 2: Quantity 3: Price
+#: includes/class-wc-telegram-notifications.php:101
+#, php-format
+msgid "• %1$s x %2$s %3$d - %4$s"
+msgstr "‫• %1$s x %2$s %3$d - %4$s"
+
+#: includes/class-wc-telegram-notifications.php:103
+msgid "Quantity"
+msgstr "تعداد"
+
+#: includes/class-wc-telegram-notifications.php:157
+msgid "is out of stock"
+msgstr "ناموجود شد"
+
+#: includes/class-wc-telegram-notifications.php:158
+msgid "is getting out of stock"
+msgstr "در حال اتمام است"
+
+#. Translators: %s is replaced with the stock status (either "is out of stock" or "is getting out of stock")
+#: includes/class-wc-telegram-notifications.php:160
+#, php-format
+msgid "⚠️ Product %s"
+msgstr "⚠️ محصول %s"
+
+#. Translators: 1: Product name 2: Product ID 3: Price 4: Stock quantity
+#: includes/class-wc-telegram-notifications.php:163
+#, php-format
+msgid "Name: %1$s"
+msgstr "نام محصول: %1$s"
+
+#. Translators: 1: Product name 2: Product ID 3: Price 4: Stock quantity
+#: includes/class-wc-telegram-notifications.php:165
+#, php-format
+msgid "ID: #%2$s"
+msgstr "شناسه: #%2$s"
+
+#. Translators: 1: Product name 2: Product ID 3: Price 4: Stock quantity
+#: includes/class-wc-telegram-notifications.php:167
+#, php-format
+msgid "Price: %3$s"
+msgstr "قیمت: %3$s"
+
+#. Translators: 1: Product name 2: Product ID 3: Price 4: Stock quantity
+#: includes/class-wc-telegram-notifications.php:169
+#, php-format
+msgid "Quantity: %4$s"
+msgstr "موجودی : %4$s"
+
+#: includes/class-wc-telegram-notifications.php:176
+msgid "Product link :"
+msgstr "لینک محصول :"
+
+#: includes/class-wc-telegram-notifications.php:267
+msgid "You do not have sufficient permissions to access this page."
+msgstr "شما دسترسی لازم به این صفحه را ندارید."
+
+#: includes/class-wc-telegram-notifications.php:271
+msgid ""
+"\\nThis is a test message from your WooCommerce Telegram Notifications "
+"plugin."
+msgstr "این یک پیام تستی برای افزونه اعلان سفارشات ووکامرس در تلگرام است."
+
+#~ msgid "Enter your Telegram topic ID for Group"
+#~ msgstr "شناسه  تایپک سفارشات را برای سوپر گروه را وارد کنید"
+
+#, php-format
+#~ msgid " name: %1$s \\n ID: #%2$s \\n price: %3$s  \\n Quantity: %4$s \\n"
+#~ msgstr " نام: %1$s \\n شناسه: #%2$s \\n قیمت: %3$s  \\n تعداد: %4$s \\n"
