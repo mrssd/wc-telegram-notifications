@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WC_Telegram_Notifications
+class WCTELNOT_Telegram_Notifications
 {
     private $settings;
 
@@ -22,7 +22,7 @@ class WC_Telegram_Notifications
             'enable_stock_notifications' => '',
             'topic_id_stock' => '',
         );
-        $this->settings = wp_parse_args(get_option('wc_telegram_notifications_settings', array()), $default_settings);
+        $this->settings = wp_parse_args(get_option('wctelnot_settings', array()), $default_settings);
 
         // Add settings page
         add_filter('woocommerce_get_settings_pages', array($this, 'add_settings_page'));
@@ -31,18 +31,18 @@ class WC_Telegram_Notifications
         add_action('woocommerce_order_status_changed', array($this, 'handle_order_status_change'), 10, 4);
 
         // Add test message functionality
-        add_action('admin_post_wc_telegram_test_message', array($this, 'send_test_message'));
+        add_action('admin_post_wctelnot_test_message', array($this, 'send_test_message'));
 
         // Declare HPOS compatibility
         add_action('before_woocommerce_init', array($this, 'declare_hpos_compatibility'));
 
         // Add settings sanitization
-        add_filter('woocommerce_admin_settings_sanitize_option_wc_telegram_notifications_settings', array($this, 'sanitize_settings'), 10, 3);
+        add_filter('woocommerce_admin_settings_sanitize_option_wctelnot_settings', array($this, 'sanitize_settings'), 10, 3);
 
         add_action('woocommerce_low_stock', array($this, 'send_stock_notification'), 10, 1);
         add_action('woocommerce_no_stock', array($this, 'send_stock_notification'), 10, 1);
 
-        add_action('wc_telegram_send_async_message', array($this, 'send_telegram_message'), 10, 2);
+        add_action('wctelnot_send_async_message', array($this, 'send_telegram_message'), 10, 2);
     }
 
     public function declare_hpos_compatibility()
@@ -54,7 +54,7 @@ class WC_Telegram_Notifications
 
     public function add_settings_page($settings)
     {
-        $settings[] = include WC_TELEGRAM_NOTIFICATIONS_PLUGIN_DIR . 'includes/class-wc-telegram-notifications-settings.php';
+        $settings[] = include WCTELNOT_PLUGIN_DIR . 'includes/class-wctelnot-telegram-notifications-settings.php';
         return $settings;
     }
 
@@ -82,7 +82,7 @@ class WC_Telegram_Notifications
         $topic_id = !empty($this->settings['topic_id']) ? $this->settings['topic_id'] : null;
 
         if (function_exists('as_schedule_single_action')) {
-            as_schedule_single_action(time(), 'wc_telegram_send_async_message', array(
+            as_schedule_single_action(time(), 'wctelnot_send_async_message', array(
                 'message' => $message,
                 'topic_id' => $topic_id,
             ));
@@ -98,9 +98,9 @@ class WC_Telegram_Notifications
             $product = $item->get_product();
             $products_list .= sprintf(
                 // Translators: 1: Product name 2: Quantity 3: Price
-                esc_html__('• %1$s x %2$s %3$d - %4$s', 'wc-telegram-notifications'),
+                esc_html__('• %1$s x %2$s %3$d - %4$s', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
                 $item->get_name(),
-                __('Quantity', 'wc-telegram-notifications'),
+                __('Quantity', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
                 $item->get_quantity(),
                 str_replace('&nbsp;', ' ', wp_strip_all_tags(wc_price($item->get_total()))),
             );
@@ -143,7 +143,7 @@ class WC_Telegram_Notifications
         $topic_id = !empty($this->settings['topic_id_stock']) ? $this->settings['topic_id_stock'] : null;
 
         if (function_exists('as_schedule_single_action')) {
-            as_schedule_single_action(time(), 'wc_telegram_send_async_message', array(
+            as_schedule_single_action(time(), 'wctelnot_send_async_message', array(
                 'message' => $message,
                 'topic_id' => $topic_id,
             ));
@@ -154,26 +154,26 @@ class WC_Telegram_Notifications
 
         $stock_quantity = $product->get_stock_quantity();
         $message_type = $stock_quantity <= 0 ?
-            __('is out of stock', 'wc-telegram-notifications') :
-            __('is getting out of stock', 'wc-telegram-notifications');
+            __('is out of stock', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce') :
+            __('is getting out of stock', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce');
         // Translators: %s is replaced with the stock status (either "is out of stock" or "is getting out of stock")
-        $message = sprintf(__('⚠️ Product %s', 'wc-telegram-notifications'), $message_type) . "\n\n";
+        $message = sprintf(__('⚠️ Product %s', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'), $message_type) . "\n\n";
         $message .= sprintf(
             // Translators: 1: Product name 2: Product ID 3: Price 4: Stock quantity
-            __('Name: %1$s', 'wc-telegram-notifications') . "\n" .
+            __('Name: %1$s', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce') . "\n" .
             // Translators: 1: Product name 2: Product ID 3: Price 4: Stock quantity
-            __('ID: #%2$s', 'wc-telegram-notifications') . "\n" .
+            __('ID: #%2$s', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce') . "\n" .
             // Translators: 1: Product name 2: Product ID 3: Price 4: Stock quantity
-            __('Price: %3$s', 'wc-telegram-notifications') . "\n" .
+            __('Price: %3$s', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce') . "\n" .
             // Translators: 1: Product name 2: Product ID 3: Price 4: Stock quantity
-            __('Quantity: %4$s', 'wc-telegram-notifications') . "\n",
+            __('Quantity: %4$s', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce') . "\n",
             $product->get_name(),
             $product->get_id(),
             str_replace('&nbsp;', ' ', wp_strip_all_tags(wc_price($product->get_price()))),
             $product->get_stock_quantity()
         );
 
-        $message .= __("Product link :", 'wc-telegram-notifications') . "\n" .
+        $message .= __("Product link :", 'order-and-stock-notifications-via-telegram-bot-for-woocommerce') . "\n" .
             $product->get_permalink();
 
 
@@ -264,16 +264,16 @@ class WC_Telegram_Notifications
     public function send_test_message()
     {
         if (!current_user_can('manage_woocommerce')) {
-            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'wc-telegram-notifications'));
+            wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'));
         }
 
 
-        $test_message = __('\nThis is a test message from your WooCommerce Telegram Notifications plugin.', 'wc-telegram-notifications');
+        $test_message = __('\nThis is a test message from your WooCommerce Telegram Notifications plugin.', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce');
 
         if ($this->send_telegram_message($test_message)) {
-            wp_redirect(add_query_arg('wc_telegram_test', 'success', admin_url('admin.php?page=wc-settings&tab=telegram_notifications')));
+            wp_redirect(add_query_arg('wctelnot_test', 'success', admin_url('admin.php?page=wc-settings&tab=telegram_notifications')));
         } else {
-            wp_redirect(add_query_arg('wc_telegram_test', 'error', admin_url('admin.php?page=wc-settings&tab=telegram_notifications')));
+            wp_redirect(add_query_arg('wctelnot_test', 'error', admin_url('admin.php?page=wc-settings&tab=telegram_notifications')));
         }
         exit;
     }

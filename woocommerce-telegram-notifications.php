@@ -6,7 +6,7 @@
  * Version: 1.0.0
  * Author: Satyar Salehian
  * Author URI: 
- * Text Domain: wc-telegram-notifications
+ * Text Domain: order-and-stock-notifications-via-telegram-bot-for-woocommerce
  * Domain Path: /languages
  * Requires at least: 5.0
  * Requires PHP: 7.2
@@ -17,12 +17,12 @@
  */
 
 // Load text domain for translations
-add_action('plugins_loaded', 'wc_telegram_notifications_load_textdomain');
+add_action('plugins_loaded', 'wctelnot_load_textdomain');
 
-function wc_telegram_notifications_load_textdomain()
+function wctelnot_load_textdomain()
 {
     load_plugin_textdomain(
-        'wc-telegram-notifications',
+        'order-and-stock-notifications-via-telegram-bot-for-woocommerce',
         false,
         dirname(plugin_basename(__FILE__)) . '/languages'
     );
@@ -45,27 +45,27 @@ if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get
 }
 
 // Define plugin constants
-define('WC_TELEGRAM_NOTIFICATIONS_VERSION', '1.0.0');
-define('WC_TELEGRAM_NOTIFICATIONS_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('WC_TELEGRAM_NOTIFICATIONS_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('WCTELNOT_VERSION', '1.0.0');
+define('WCTELNOT_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('WCTELNOT_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 // Include required files
-require_once WC_TELEGRAM_NOTIFICATIONS_PLUGIN_DIR . 'includes/class-wc-telegram-notifications.php';
+require_once WCTELNOT_PLUGIN_DIR . 'includes/class-wctelnot-telegram-notifications.php';
 
 // Initialize the plugin
-function wc_telegram_notifications_init()
+function wctelnot_init()
 {
-    $plugin = new WC_Telegram_Notifications();
+    $plugin = new WCTELNOT_Telegram_Notifications();
     $plugin->init();
 }
-add_action('plugins_loaded', 'wc_telegram_notifications_init');
+add_action('plugins_loaded', 'wctelnot_init');
 
 // Activation hook
-register_activation_hook(__FILE__, 'wc_telegram_notifications_activate');
-function wc_telegram_notifications_activate()
+register_activation_hook(__FILE__, 'wctelnot_activate');
+function wctelnot_activate()
 {
     // Add default options
-    $existing_settings = get_option('wc_telegram_notifications_settings', array());
+    $existing_settings = get_option('wctelnot_settings', array());
     $default_settings = array(
         'bot_token' => '',
         'chat_id' => '',
@@ -80,25 +80,25 @@ function wc_telegram_notifications_activate()
 
     // Merge with existing settings to preserve user values
     $settings = wp_parse_args($existing_settings, $default_settings);
-    update_option('wc_telegram_notifications_settings', $settings);
+    update_option('wctelnot_settings', $settings);
 }
 
 // Deactivation hook
-register_deactivation_hook(__FILE__, 'wc_telegram_notifications_deactivate');
-function wc_telegram_notifications_deactivate()
+register_deactivation_hook(__FILE__, 'wctelnot_deactivate');
+function wctelnot_deactivate()
 {
     // Cleanup if needed
 }
 
-register_uninstall_hook(__FILE__, 'wc_telegram_notifications_uninstall');
+register_uninstall_hook(__FILE__, 'wctelnot_uninstall');
 
-function wc_telegram_notifications_uninstall()
+function wctelnot_uninstall()
 {
     // Delete all plugin options
-    delete_option('wc_telegram_notifications_settings');
+    delete_option('wctelnot_settings');
 
     // (Optional) Delete scheduled actions if any
     if (function_exists('as_unschedule_all_actions')) {
-        as_unschedule_all_actions('wc_telegram_send_async_message');
+        as_unschedule_all_actions('wctelnot_send_async_message');
     }
 }
