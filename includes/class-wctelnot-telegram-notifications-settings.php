@@ -79,29 +79,34 @@ class WCTELNOT_Settings_Telegram_Notifications extends WC_Settings_Page
             ),
             array(
                 'title' => __('Message Template', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
-                'desc' => __('Customize your notification message. Available tags: {order_id}, {status}, {customer_name}, {currency}, {total}, {total_formated}, {billing_email}, {shipping_method}, {payment_method}, {date}, {time}, {products}', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
+                'desc' => __('Customize your notification message. Available tags: {order_id}, {status}, {customer_name}, {currency}, {total}, {total_formated}, {billing_email}, {billing_phone}, {shipping_method}, {payment_method}, {date}, {time}, {products}', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
                 'id' => 'wctelnot_settings[message_template]',
                 'type' => 'textarea',
                 'default' => "New order #{order_id}\nStatus: {status}\nCustomer: {customer_name}\nTotal: {total}",
                 'css' => 'width: 400px; height: 150px;'
             ),
             array(
-                'title' => __('Use Google Apps Script', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
-                'desc' => __('Enable to use Google Apps Script instead of direct Telegram API', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
+                'title' => __('Use Google Apps Script or Cloudflare Workers', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
+                'desc' => __('Enable to use Google Apps Script or Cloudflare Workers instead of direct Telegram API', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
                 'id' => 'wctelnot_settings[use_google_script]',
                 'type' => 'checkbox',
                 'default' => 'no',
             ),
             array(
-                'title' => __('Google Script Web App URL', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
-                'desc' => __('Enter your Google Apps Script Web App URL', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
+                'title' => __('Google Script Web App or Cloudflare Workers URL', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
+                'desc' => __('Enter your Google Apps Script Web App or Cloudflare Workers URL', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
                 'id' => 'wctelnot_settings[google_script_url]',
                 'type' => 'text',
                 'default' => '',
                 'css' => 'width: 400px;'
             ),
-
-
+            array(
+                'title' => __('Use Default API Bridge', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
+                'desc' => __('Enable to use the default bridge for sending notifications - For more security use your own API bridge', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
+                'id' => 'wctelnot_settings[use_default_bridge]',
+                'type' => 'checkbox',
+                'default' => 'no',
+            ),
             array(
                 'title' => __('Enable Stock Notifications', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
                 'desc' => __('Send notifications when products become out of stock', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
@@ -145,6 +150,44 @@ class WCTELNOT_Settings_Telegram_Notifications extends WC_Settings_Page
                 <?php esc_html_e('Send Test Message', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'); ?>
             </a>
         </p>
+
+        <!-- Add JavaScript validation for conflicting options -->
+        <script type="text/javascript">
+            jQuery(document).ready(function ($) {
+                var $useGoogleScript = $('#wctelnot_settings\\[use_google_script\\]');
+                var $useDefaultBridge = $('#wctelnot_settings\\[use_default_bridge\\]');
+
+                function checkConflict() {
+                    if ($useGoogleScript.is(':checked') && $useDefaultBridge.is(':checked')) {
+                        alert('<?php echo esc_js(__('You cannot enable both "Use Google Apps Script or Cloudflare Workers" and "Use Default API Bridge" at the same time. Please choose only one option.', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce')); ?>');
+                        return false;
+                    }
+                    return true;
+                }
+
+                $useGoogleScript.on('change', function () {
+                    if ($(this).is(':checked') && $useDefaultBridge.is(':checked')) {
+                        $useDefaultBridge.prop('checked', false);
+                        alert('<?php echo esc_js(__('Use Default API Bridge has been disabled because Use Google Apps Script is now enabled.', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce')); ?>');
+                    }
+                });
+
+                $useDefaultBridge.on('change', function () {
+                    if ($(this).is(':checked') && $useGoogleScript.is(':checked')) {
+                        $useGoogleScript.prop('checked', false);
+                        alert('<?php echo esc_js(__('Use Google Apps Script has been disabled because Use Default API Bridge is now enabled.', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce')); ?>');
+                    }
+                });
+
+                // Validate on form submission
+                $('form').on('submit', function (e) {
+                    if (!checkConflict()) {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+            });
+        </script>
         <?php
 
         // Display test message result
@@ -163,6 +206,25 @@ class WCTELNOT_Settings_Telegram_Notifications extends WC_Settings_Page
 
     public function save()
     {
+        // Get the posted data
+        $use_google_script = isset($_POST['wctelnot_settings']['use_google_script']) ? 'yes' : 'no';
+        $use_default_bridge = isset($_POST['wctelnot_settings']['use_default_bridge']) ? 'yes' : 'no';
+
+        // Validate that both options are not enabled simultaneously
+        if ($use_google_script === 'yes' && $use_default_bridge === 'yes') {
+            // Add error notice
+            add_settings_error(
+                'wctelnot_settings',
+                'conflicting_options',
+                __('Error: You cannot enable both "Use Google Apps Script or Cloudflare Workers" and "Use Default API Bridge" at the same time. Please choose only one option.', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
+                'error'
+            );
+
+            // Disable both options to prevent conflict
+            $_POST['wctelnot_settings']['use_google_script'] = 'no';
+            $_POST['wctelnot_settings']['use_default_bridge'] = 'no';
+        }
+
         $settings = $this->get_settings();
         WC_Admin_Settings::save_fields($settings);
     }

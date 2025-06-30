@@ -4,7 +4,7 @@ Donate link: https://paypal.me/satyarsd
 Tags: telegram, woocommerce, notifications
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.0
+Stable tag: 1.0.2
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -22,6 +22,9 @@ A lightweight plugin that sends WooCommerce order or stock updates to Telegram u
 - Easy setup through WooCommerce settings
 
 == Installation ==
+Installation Video:
+https://www.youtube.com/watch?v=Hq-jbnU_NRc
+
 1. Download the plugin files
 2. Upload the plugin folder to your WordPress plugins directory (`wp-content/plugins/`)
 3. Activate the plugin through the WordPress admin panel
@@ -30,13 +33,29 @@ A lightweight plugin that sends WooCommerce order or stock updates to Telegram u
 For using Goolge Script, use the source in Docs/google_script_source.js in Github :
 https://github.com/mrssd/wc-telegram-notifications
 
+For using Cloudflare Workers, use the source in Docs/cloudflare_workers.js in Github :
+https://github.com/mrssd/wc-telegram-notifications
+
 == Frequently Asked Questions ==
 - Is this plugin works in countries with Telegram limitation ? Yes, you can use Google Script to use this plugin
 
 == Changelog ==
 = 1.0.0 =
 * Initial release.
+= 1.0.1 =
+* Resolving sending message priority.
+= 1.0.2 =
+* Adding Cloudflare Workers for Telegram API's connection.
+* Adding Billing Phone number tag in message template.
+* Improving installation's document.
+
 
 == Upgrade Notice ==
 = 1.0.0 =
 Initial release.
+= 1.0.1 =
+* Resolving sending message priority.
+= 1.0.2 =
+* Adding Cloudflare Workers for Telegram API's connection.
+* Adding Billing Phone number tag in message template.
+* Improving installation's document.

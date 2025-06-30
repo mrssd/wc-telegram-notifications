@@ -19,6 +19,7 @@ class WCTELNOT_Telegram_Notifications
             'message_template' => "New order #{order_id}\nStatus: {status}\nCustomer: {customer_name}\nTotal: {total}",
             'use_google_script' => '',
             'google_script_url' => '',
+            'use_default_bridge' => '',
             'enable_stock_notifications' => '',
             'topic_id_stock' => '',
         );
@@ -81,11 +82,20 @@ class WCTELNOT_Telegram_Notifications
 
         $topic_id = !empty($this->settings['topic_id']) ? $this->settings['topic_id'] : null;
 
+        // Try to schedule with high priority first
         if (function_exists('as_schedule_single_action')) {
-            as_schedule_single_action(time(), 'wctelnot_send_async_message', array(
+            $scheduled = as_schedule_single_action(time(), 'wctelnot_send_async_message', array(
                 'message' => $message,
                 'topic_id' => $topic_id,
-            ));
+            ), '', true, 1); // High priority (1) and unique group
+
+            // If scheduling fails or Action Scheduler queue is overloaded, send immediately
+            if (!$scheduled || $this->is_action_scheduler_overloaded()) {
+                $this->send_telegram_message($message, $topic_id);
+            }
+        } else {
+            // Fallback: send immediately if Action Scheduler is not available
+            $this->send_telegram_message($message, $topic_id);
         }
 
     }
@@ -98,7 +108,7 @@ class WCTELNOT_Telegram_Notifications
             $product = $item->get_product();
             $products_list .= sprintf(
                 // Translators: 1: Product name 2: Quantity 3: Price
-                esc_html__('• %1$s x %2$s %3$d - %4$s', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
+                esc_html__('• %1$s x %2$s %3$d - %4$s', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce') . "\n",
                 $item->get_name(),
                 __('Quantity', 'order-and-stock-notifications-via-telegram-bot-for-woocommerce'),
                 $item->get_quantity(),
@@ -120,6 +130,7 @@ class WCTELNOT_Telegram_Notifications
                 ? get_woocommerce_currency_symbol($order->get_currency())
                 : $order->get_currency(),
             '{billing_email}' => $order->get_billing_email(),
+            '{billing_phone}' => $order->get_billing_phone(),
             '{shipping_method}' => $order->get_shipping_method(),
             '{payment_method}' => $order->get_payment_method_title(),
             '{note}' => $order->get_customer_note(),
@@ -142,11 +153,20 @@ class WCTELNOT_Telegram_Notifications
 
         $topic_id = !empty($this->settings['topic_id_stock']) ? $this->settings['topic_id_stock'] : null;
 
+        // Try to schedule with high priority first
         if (function_exists('as_schedule_single_action')) {
-            as_schedule_single_action(time(), 'wctelnot_send_async_message', array(
+            $scheduled = as_schedule_single_action(time(), 'wctelnot_send_async_message', array(
                 'message' => $message,
                 'topic_id' => $topic_id,
-            ));
+            ), '', true, 1); // High priority (1) and unique group
+
+            // If scheduling fails or Action Scheduler queue is overloaded, send immediately
+            if (!$scheduled || $this->is_action_scheduler_overloaded()) {
+                $this->send_telegram_message($message, $topic_id);
+            }
+        } else {
+            // Fallback: send immediately if Action Scheduler is not available
+            $this->send_telegram_message($message, $topic_id);
         }
     }
     private function prepare_stock_message($product)
@@ -187,9 +207,13 @@ class WCTELNOT_Telegram_Notifications
         }
 
         $use_google_script = isset($this->settings['use_google_script']) ? $this->settings['use_google_script'] : 'no';
-
+        $use_default_bridge = isset($this->settings['use_default_bridge']) ? $this->settings['use_default_bridge'] : 'no';
         if ($use_google_script === 'yes' && !empty($this->settings['google_script_url'])) {
             return $this->send_via_google_script($message, $topic_id);
+
+        } else if ($use_default_bridge === 'yes') {
+            return $this->send_via_default_bridge($message, $topic_id);
+
         } else {
             return $this->send_via_telegram_api($message, $topic_id);
         }
@@ -261,6 +285,40 @@ class WCTELNOT_Telegram_Notifications
         return true;
     }
 
+    private function send_via_default_bridge($message, $topic_id = null)
+    {
+        $api_url = "https://telegram-bot-bridge.ssd-satyar.workers.dev";
+
+        $body = array(
+            'token' => $this->settings['bot_token'],
+            'method' => 'sendMessage',
+            'chat_id' => $this->settings['chat_id'],
+            'text' => $message,
+            'parse_mode' => 'HTML'
+        );
+
+        // Add message_thread_id if topic_id is set
+
+        if ($topic_id) {
+            $body['topic_id'] = $topic_id;
+        }
+
+        $args = array(
+            'body' => $body,
+            'timeout' => 30
+        );
+
+        $response = wp_remote_post($api_url, $args);
+
+        if (is_wp_error($response)) {
+            error_log('WC Telegram Notifications Error: ' . $response->get_error_message());
+            return false;
+        }
+
+        return true;
+    }
+
+
     public function send_test_message()
     {
         if (!current_user_can('manage_woocommerce')) {
@@ -291,7 +349,34 @@ class WCTELNOT_Telegram_Notifications
         // Ensure checkbox values are properly set
         $value['use_google_script'] = isset($raw_value['use_google_script']) ? 'yes' : 'no';
         $value['enable_stock_notifications'] = isset($raw_value['enable_stock_notifications']) ? 'yes' : 'no';
+        $value['use_default_bridge'] = isset($raw_value['use_default_bridge']) ? 'yes' : 'no';
 
         return $value;
+    }
+    /**
+     * Check if Action Scheduler queue is overloaded
+     * @return bool
+     */
+    private function is_action_scheduler_overloaded()
+    {
+        if (!function_exists('as_get_scheduled_actions')) {
+            return false;
+        }
+
+        // Check if there are too many pending actions
+        $pending_actions = as_get_scheduled_actions(array(
+            'status' => 'pending',
+            'per_page' => 1,
+            'hook' => 'wctelnot_send_async_message'
+        ));
+
+        // If there are more than 50 pending telegram actions, consider it overloaded
+        $pending_count = count($pending_actions);
+
+        if (defined('WP_DEBUG') && WP_DEBUG && $pending_count > 10) {
+            error_log("WC Telegram Notifications: Action Scheduler has {$pending_count} pending telegram actions");
+        }
+
+        return $pending_count > 50;
     }
 }

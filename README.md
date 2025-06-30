@@ -4,6 +4,8 @@
 
 A WordPress plugin that integrates WooCommerce with Telegram to send order status updates directly to your Telegram chat, group, super group.
 
+[Download from wordpress.org](https://wordpress.org/plugins/order-and-stock-notifications-via-telegram-bot-for-woocommerce/)
+
 ## Features
 
 - Send WooCommerce order status updates to Telegram

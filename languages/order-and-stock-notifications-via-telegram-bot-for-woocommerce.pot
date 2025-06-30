@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Order and Stock Notifications via Telegram Bot for WooCommerce 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/order-and-stock-notifications-via-telegram-bot-for-woocommerce\n"
+"Project-Id-Version: Order and Stock Notifications via Telegram Bot for WooCommerce 1.0.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wc-telegram-notifications\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-18T06:06:57+00:00\n"
+"POT-Creation-Date: 2025-06-30T05:46:28+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: order-and-stock-notifications-via-telegram-bot-for-woocommerce\n"
@@ -29,184 +29,208 @@ msgstr ""
 msgid "Satyar Salehian"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:12
+#: includes/class-wctelnot-telegram-notifications-settings.php:12
 msgid "Telegram Notifications"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:33
+#: includes/class-wctelnot-telegram-notifications-settings.php:33
 msgid "Telegram Notifications Settings"
 msgstr ""
 
 #. translators: %s: Video tutorial link
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:37
+#: includes/class-wctelnot-telegram-notifications-settings.php:37
 #, php-format
 msgid "Configure your Telegram bot settings for WooCommerce order notifications. <a href=\"%s\" target=\"_blank\">Watch our tutorial video</a> to learn how to setup this plugin."
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:43
+#: includes/class-wctelnot-telegram-notifications-settings.php:43
 msgid "Telegram Bot Token"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:44
+#: includes/class-wctelnot-telegram-notifications-settings.php:44
 msgid "Enter your Telegram Bot Token"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:51
+#: includes/class-wctelnot-telegram-notifications-settings.php:51
 msgid "Chat ID / Group ID"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:52
+#: includes/class-wctelnot-telegram-notifications-settings.php:52
 msgid "Enter your Telegram Chat ID or Group ID"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:53
+#: includes/class-wctelnot-telegram-notifications-settings.php:53
 msgid "- To find your Chat ID, use @userinfobot "
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:54
+#: includes/class-wctelnot-telegram-notifications-settings.php:54
 msgid "- To find your Group ID, add this @getidsbot bot to your group. After getting group ID remmeber to remove this bot from the group."
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:55
+#: includes/class-wctelnot-telegram-notifications-settings.php:55
 msgid "- If you are using a Super Group, prepend the group ID with -100. For example, if your group ID is 123456789, use -100123456789."
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:56
+#: includes/class-wctelnot-telegram-notifications-settings.php:56
 msgid "- If you are using a normal group, prepend the group ID with -100. For example, if your group ID is 123456789, use -100123456789."
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:64
+#: includes/class-wctelnot-telegram-notifications-settings.php:64
 msgid "Orders Topic ID "
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:65
+#: includes/class-wctelnot-telegram-notifications-settings.php:65
 msgid "Enter your Telegram topic ID for Super Groups or leave it empty if you use normal group or chat."
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:72
+#: includes/class-wctelnot-telegram-notifications-settings.php:72
 msgid "Order Status Triggers"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:73
+#: includes/class-wctelnot-telegram-notifications-settings.php:73
 msgid "Select which order statuses should trigger notifications"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:81
+#: includes/class-wctelnot-telegram-notifications-settings.php:81
 msgid "Message Template"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:82
-msgid "Customize your notification message. Available tags: {order_id}, {status}, {customer_name}, {currency}, {total}, {total_formated}, {billing_email}, {shipping_method}, {payment_method}, {date}, {time}, {products}"
+#: includes/class-wctelnot-telegram-notifications-settings.php:82
+msgid "Customize your notification message. Available tags: {order_id}, {status}, {customer_name}, {currency}, {total}, {total_formated}, {billing_email}, {billing_phone}, {shipping_method}, {payment_method}, {date}, {time}, {products}"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:89
-msgid "Use Google Apps Script"
+#: includes/class-wctelnot-telegram-notifications-settings.php:89
+msgid "Use Google Apps Script or Cloudflare Workers"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:90
-msgid "Enable to use Google Apps Script instead of direct Telegram API"
+#: includes/class-wctelnot-telegram-notifications-settings.php:90
+msgid "Enable to use Google Apps Script or Cloudflare Workers instead of direct Telegram API"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:96
-msgid "Google Script Web App URL"
+#: includes/class-wctelnot-telegram-notifications-settings.php:96
+msgid "Google Script Web App or Cloudflare Workers URL"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:97
-msgid "Enter your Google Apps Script Web App URL"
+#: includes/class-wctelnot-telegram-notifications-settings.php:97
+msgid "Enter your Google Apps Script Web App or Cloudflare Workers URL"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:106
+#: includes/class-wctelnot-telegram-notifications-settings.php:104
+msgid "Use Default API Bridge"
+msgstr ""
+
+#: includes/class-wctelnot-telegram-notifications-settings.php:105
+msgid "Enable to use the default bridge for sending notifications - For more security use your own API bridge"
+msgstr ""
+
+#: includes/class-wctelnot-telegram-notifications-settings.php:111
 msgid "Enable Stock Notifications"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:107
+#: includes/class-wctelnot-telegram-notifications-settings.php:112
 msgid "Send notifications when products become out of stock"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:113
+#: includes/class-wctelnot-telegram-notifications-settings.php:118
 msgid "Topic ID for Stock "
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:114
+#: includes/class-wctelnot-telegram-notifications-settings.php:119
 msgid "Enter your Telegram topic ID for Stock - if this does not set the defult ones will use or leave it empty"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:125
+#: includes/class-wctelnot-telegram-notifications-settings.php:130
 msgid "Test Notifications"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:127
+#: includes/class-wctelnot-telegram-notifications-settings.php:132
 msgid "Send a test message to verify your settings."
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:145
+#: includes/class-wctelnot-telegram-notifications-settings.php:150
 msgid "Send Test Message"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:154
+#: includes/class-wctelnot-telegram-notifications-settings.php:162
+msgid "You cannot enable both \"Use Google Apps Script or Cloudflare Workers\" and \"Use Default API Bridge\" at the same time. Please choose only one option."
+msgstr ""
+
+#: includes/class-wctelnot-telegram-notifications-settings.php:171
+msgid "Use Default API Bridge has been disabled because Use Google Apps Script is now enabled."
+msgstr ""
+
+#: includes/class-wctelnot-telegram-notifications-settings.php:178
+msgid "Use Google Apps Script has been disabled because Use Default API Bridge is now enabled."
+msgstr ""
+
+#: includes/class-wctelnot-telegram-notifications-settings.php:197
 msgid "Test message sent successfully!"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce-settings.php:158
+#: includes/class-wctelnot-telegram-notifications-settings.php:201
 msgid "Failed to send test message. Please check your settings."
 msgstr ""
 
+#: includes/class-wctelnot-telegram-notifications-settings.php:219
+msgid "Error: You cannot enable both \"Use Google Apps Script or Cloudflare Workers\" and \"Use Default API Bridge\" at the same time. Please choose only one option."
+msgstr ""
+
 #. Translators: 1: Product name 2: Quantity 3: Price
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce.php:101
+#: includes/class-wctelnot-telegram-notifications.php:111
 #, php-format
 msgid "• %1$s x %2$s %3$d - %4$s"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce.php:103
+#: includes/class-wctelnot-telegram-notifications.php:113
 msgid "Quantity"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce.php:157
+#: includes/class-wctelnot-telegram-notifications.php:177
 msgid "is out of stock"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce.php:158
+#: includes/class-wctelnot-telegram-notifications.php:178
 msgid "is getting out of stock"
 msgstr ""
 
 #. Translators: %s is replaced with the stock status (either "is out of stock" or "is getting out of stock")
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce.php:160
+#: includes/class-wctelnot-telegram-notifications.php:180
 #, php-format
 msgid "⚠️ Product %s"
 msgstr ""
 
 #. Translators: 1: Product name 2: Product ID 3: Price 4: Stock quantity
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce.php:163
+#: includes/class-wctelnot-telegram-notifications.php:183
 #, php-format
 msgid "Name: %1$s"
 msgstr ""
 
 #. Translators: 1: Product name 2: Product ID 3: Price 4: Stock quantity
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce.php:165
+#: includes/class-wctelnot-telegram-notifications.php:185
 #, php-format
 msgid "ID: #%2$s"
 msgstr ""
 
 #. Translators: 1: Product name 2: Product ID 3: Price 4: Stock quantity
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce.php:167
+#: includes/class-wctelnot-telegram-notifications.php:187
 #, php-format
 msgid "Price: %3$s"
 msgstr ""
 
 #. Translators: 1: Product name 2: Product ID 3: Price 4: Stock quantity
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce.php:169
+#: includes/class-wctelnot-telegram-notifications.php:189
 #, php-format
 msgid "Quantity: %4$s"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce.php:176
+#: includes/class-wctelnot-telegram-notifications.php:196
 msgid "Product link :"
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce.php:267
+#: includes/class-wctelnot-telegram-notifications.php:325
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: includes/class-order-and-stock-notifications-via-telegram-bot-for-woocommerce.php:271
+#: includes/class-wctelnot-telegram-notifications.php:329
 msgid "\\nThis is a test message from your WooCommerce Telegram Notifications plugin."
 msgstr ""
