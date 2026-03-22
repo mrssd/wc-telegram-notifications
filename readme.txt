@@ -3,8 +3,8 @@ Contributors: mrssd
 Donate link: https://paypal.me/satyarsd
 Tags: telegram, woocommerce, notifications
 Requires at least: 5.0
-Tested up to: 6.8
-Stable tag: 1.0.2
+Tested up to: 6.9.4
+Stable tag: 1.0.3
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -48,6 +48,9 @@ https://github.com/mrssd/wc-telegram-notifications
 * Adding Cloudflare Workers for Telegram API's connection.
 * Adding Billing Phone number tag in message template.
 * Improving installation's document.
+= 1.0.3 =
+* Update the compatibility with newer version of WP
+
 
 
 == Upgrade Notice ==
@@ -59,3 +62,6 @@ Initial release.
 * Adding Cloudflare Workers for Telegram API's connection.
 * Adding Billing Phone number tag in message template.
 * Improving installation's document.
+= 1.0.3 =
+* Update the compatibility with newer version of WP
+

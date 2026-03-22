@@ -3,15 +3,15 @@
  * Plugin Name: Order and Stock Notifications via Telegram Bot for WooCommerce
  * Plugin URI: 
  * Description: Send WooCommerce order status updates directly to Telegram using Bot API or Google Apps Script
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Satyar Salehian
  * Author URI: 
  * Text Domain: order-and-stock-notifications-via-telegram-bot-for-woocommerce
  * Domain Path: /languages
  * Requires at least: 5.0
  * Requires PHP: 7.2
- * WC requires at least: 3.0
- * WC tested up to: 9.8.0
+ * WC requires at least: 8.0
+ * WC tested up to: 10.6.1
  * WooCommerce-HPOS: true
  * License: GPLv2 or later
  */
@@ -45,7 +45,7 @@ if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get
 }
 
 // Define plugin constants
-define('WCTELNOT_VERSION', '1.0.2');
+define('WCTELNOT_VERSION', '1.0.3');
 define('WCTELNOT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WCTELNOT_PLUGIN_URL', plugin_dir_url(__FILE__));
 
